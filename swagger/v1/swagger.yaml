@@ -1,0 +1,227 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/login":
+    post:
+      summary: Logs in a user
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: user logged in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/create-account":
+    post:
+      summary: Creates an account
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: account created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                password-confirm:
+                  type: string
+              required:
+              - email
+              - password
+              - password-confirm
+  "/verify-account":
+    post:
+      summary: Verifies an account
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: account verified
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+              required:
+              - key
+  "/verify-account-resend":
+    post:
+      summary: Resends account verification email
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: account verification email resent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+  "/logout":
+    post:
+      summary: Logs out a user
+      tags:
+      - Rodauth
+      responses:
+        '200':
+          description: user logged out
+  "/reset-password-request":
+    post:
+      summary: Sends a password reset email
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: password reset email sent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+  "/reset-password":
+    post:
+      summary: Resets a user password
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: password reset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                password:
+                  type: string
+              required:
+              - key
+              - password
+  "/change-password":
+    post:
+      summary: Changes a user password
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: password changed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                new-password:
+                  type: string
+              required:
+              - new-password
+  "/change-login":
+    post:
+      summary: Changes a user login
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: login changed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+  "/verify-login-change":
+    post:
+      summary: Verifies a login change
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: login change verified
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+              required:
+              - key
+  "/close-account":
+    post:
+      summary: Closes a user account
+      tags:
+      - Rodauth
+      parameters: []
+      responses:
+        '200':
+          description: account closed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+              required:
+              - password
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
